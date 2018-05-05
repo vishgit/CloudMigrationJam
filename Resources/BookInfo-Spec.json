@@ -4,12 +4,6 @@
     "description": "List products, their reviews and ratings",
     "version": "1.0.0",
     "title": "Products, reviews and ratings",
-    "termsOfService": "http://35.229.47.104/terms-of-service",
-    "contact": {
-      "name": "API Team",
-      "url": "http://35.229.47.104/contact",
-      "email": "apiteam@47.104"
-    },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
