@@ -16,7 +16,7 @@
     }
   },
   "host": "35.229.47.104",
-  "basePath": "/api/v1",
+  "basePath": "/v1",
   "schemes": [
     "http"
   ],
