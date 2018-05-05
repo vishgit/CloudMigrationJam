@@ -1,0 +1,249 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "List products, their reviews and ratings",
+    "version": "1.0.0",
+    "title": "Products, reviews and ratings",
+    "termsOfService": "http://35.229.47.104/terms-of-service",
+    "contact": {
+      "name": "API Team",
+      "url": "http://35.229.47.104/contact",
+      "email": "apiteam@47.104"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "35.229.47.104",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "List products",
+        "operationId": "List_products",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "description": "",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "required": [
+                  "descriptionHtml",
+                  "id",
+                  "title"
+                ],
+                "properties": {
+                  "descriptionHtml": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Get product",
+        "operationId": "get-product",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "publisher": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "language": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "author": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "id": {
+                  "type": "number"
+                },
+                "ISBN-10": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "ISBN-13": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "year": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "pages": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "publisher",
+                "language",
+                "author",
+                "id",
+                "ISBN-10",
+                "ISBN-13",
+                "year",
+                "type",
+                "pages"
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "The Product Id",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/products/{id}/ratings": {
+      "get": {
+        "summary": "Get ratings for a product",
+        "operationId": "get-ratings",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "ratings": {
+                  "type": "object",
+                  "properties": {
+                    "Reviewer2": {
+                      "type": "number"
+                    },
+                    "Reviewer1": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "Reviewer2",
+                    "Reviewer1"
+                  ]
+                },
+                "id": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "ratings",
+                "id"
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "The product id",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/products/{id}/reviews": {
+      "get": {
+        "summary": "Get reviews for a product",
+        "operationId": "get-reviews",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "reviews": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "reviewer",
+                      "text"
+                    ],
+                    "properties": {
+                      "reviewer": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "reviews",
+                "id"
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "description": "The product Id",
+            "required": true
+          }
+        ]
+      }
+    }
+  }
+}
