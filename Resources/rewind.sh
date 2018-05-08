@@ -26,7 +26,7 @@ if [ "$#" -ne 1 ]; then
     echo "Illegal number of parameters"
     echo "    rewind.sh <labnumber>"
     echo "where labnumber is between 1 for Istio setup and 2 for Apigee setup."
-    exit 5
+    return 5
 fi
 
 LABNUMBER=$1
@@ -34,7 +34,7 @@ LABNUMBER=$1
 if [ "$LABNUMBER" -lt 1 -o "$LABNUMBER" -gt 2 ]; then
 
     echo " Lab number should be between 1 and 2"
-    exit 2
+    return 2
 fi
 
 
