@@ -45,7 +45,7 @@ fi
 #-----------------------------------------------------------------------
 if [ 1 -le "$LABNUMBER" ]; then
 
-echo -e "\nSetting up Lab 1.\n\n"
+echo -e "\n[1] Fast forward to the Istio Lab.\n\n"
 
 
 
@@ -94,7 +94,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
     --user=$(gcloud config get-value core/account)
 
 
-
+echo -e "\n[1] Rewound to the beginning of the Istio Lab.\n\n"
 fi
 #-----------------------------------------------------------------------
 
@@ -105,7 +105,7 @@ fi
 #-----------------------------------------------------------------------
 if [ 2 -le "$LABNUMBER" ]; then
 
-echo -e "\nSetting up Lab 2.\n\n"
+echo -e "\n[2] Fast forward to the Apigee Lab.\n\n"
 
 
 
@@ -139,7 +139,7 @@ kubectl create -f <(istioctl kube-inject -f samples/bookinfo/kube/bookinfo.yaml)
 istioctl create -f samples/bookinfo/kube/route-rule-all-v1.yaml -n default
 
 
-
+echo -e "\n[2] Rewound to the beginning of the Apigee Lab.\n\n"
 
 fi
 #-----------------------------------------------------------------------
