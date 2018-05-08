@@ -49,20 +49,6 @@ echo -e "\nSetting up Lab 1.\n\n"
 
 
 
-fi
-#-----------------------------------------------------------------------
-
-#-----------------------------------------------------------------------
-#
-# Lab 2 Setup
-#
-#-----------------------------------------------------------------------
-if [ 2 -le "$LABNUMBER" ]; then
-
-echo -e "\nSetting up Lab 2.\n\n"
-
-
-
 export USER_ID=$(gcloud config get-value core/account)
 
 echo "Checking if logged into a gcp account..."
@@ -94,15 +80,6 @@ gcloud config set compute/zone $ZONE_ID
 gcloud config list
 
 
-#
-# Test if roles/container.admin is granted to the active user
-#
-if [ "$(gcloud projects get-iam-policy $PROJECT_ID --format=json | jq -r ".bindings[] | select( .role == \"roles/container.admin\") | .members [] | contains(\"user:$USER_ID\")")" != "true" ]; then
-    echo "User $USER_ID is missing required role: roles/container.admin"
-    return 1
-fi
-
-
 # create gke cluster
 gcloud container clusters create apijam \
     --machine-type=n1-standard-2 \
@@ -116,6 +93,29 @@ kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
     --user=$(gcloud config get-value core/account)
 
+
+
+fi
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+#
+# Lab 2 Setup
+#
+#-----------------------------------------------------------------------
+if [ 2 -le "$LABNUMBER" ]; then
+
+echo -e "\nSetting up Lab 2.\n\n"
+
+
+
+#
+# Test if roles/container.admin is granted to the active user
+#
+if [ "$(gcloud projects get-iam-policy $PROJECT_ID --format=json | jq -r ".bindings[] | select( .role == \"roles/container.admin\") | .members [] | contains(\"user:$USER_ID\")")" != "true" ]; then
+    echo "User $USER_ID is missing required role: roles/container.admin"
+    return 1
+fi
 
 
 
