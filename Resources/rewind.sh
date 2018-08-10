@@ -122,10 +122,10 @@ echo -e "\n[2] Fast forward to the Apigee Lab...\n\n"
 #
 # Test if roles/container.admin is granted to the active user
 #
-if [ "$(gcloud projects get-iam-policy $PROJECT_ID --format=json | jq -r ".bindings[] | select( .role == \"roles/container.admin\") | .members [] | contains(\"user:$USER_ID\")")" != "true" ]; then
-    echo "User $USER_ID is missing required role: roles/container.admin"
-    return 1
-fi
+#if [ "$(gcloud projects get-iam-policy $PROJECT_ID --format=json | jq -r ".bindings[] | select( .role == \"roles/container.admin\") | .members [] | contains(\"user:$USER_ID\")")" != "true" ]; then
+#    echo "User $USER_ID is missing required role: roles/container.admin"
+#    return 1
+#fi
 
 
 
