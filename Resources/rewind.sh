@@ -91,11 +91,11 @@ gcloud config list
 
 
 # create gke cluster
-gcloud container clusters create apijam \
+gcloud beta container clusters create apijam \
     --machine-type=n1-standard-2 \
     --num-nodes=6 \
     --no-enable-legacy-authorization \
-    --cluster-version=1.8.8-gke.0
+    --cluster-version=1.9.7-gke.3
 
 
 
@@ -129,8 +129,7 @@ fi
 
 
 
-
-ISTIO_INSTALL_OUTPUT=$(curl -L https://git.io/getLatestIstio | sh -)
+ISTIO_INSTALL_OUTPUT=$(curl -L https://git.io/getLatestIstio | ISTIO_VERSION=0.7.1 sh -)
 
 export ISTIO_HOME=$(echo -e "$ISTIO_INSTALL_OUTPUT" | awk "/export PATH=/{ match(\$0, /PATH:(.+)\/bin/ ); print substr(\$0,RSTART+5,RLENGTH-9)}")
 
@@ -139,8 +138,7 @@ export PATH=$PATH:$ISTIO_HOME/bin
 
 cd $ISTIO_HOME
 
-kubectl apply -f ./install/kubernetes/istio-auth.yaml
-
+kubectl apply -f install/kubernetes/istio-demo-auth.yaml
 
 
 kubectl create -f <(istioctl kube-inject -f samples/bookinfo/kube/bookinfo.yaml)
